@@ -1,0 +1,26 @@
+notification{
+	font-family:Tahoma;
+	font-size:18px;
+	text-align: left;
+	padding-left: 15;
+	text-indent: -10;
+	leading:-2;
+	color: #ffffff;
+}
+notificationWarn{
+	font-family:Tahoma;
+	font-weight:bold;
+	font-size:18px;
+	text-align: left;
+	padding-left: 15;
+	text-indent: -10;
+	leading:-2;
+	color: #ffffff;
+}
+
+title{
+	font-family: Tahoma;
+	font-size: 20px;
+	color: #4E280A;
+	text-align: center;
+}

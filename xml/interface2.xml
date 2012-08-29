@@ -1,0 +1,519 @@
+<Definition>
+	<Import url="[config.mod.template.button]iconButton.xml" />
+	<Import url="[config.mod.template]button/sortButton.xml" />
+	<Import url="[config.mod.template]button/simpleButton.xml" />
+	<Import url="[config.mod.template]button/labelCheckBox.xml" />
+	
+	<Constants>
+		<Constant name="assets" value="[config.ui.skin]assets.swf|" />
+		<Constant name="css" value="[config.ui.skin]css/" />
+		<Constant name="notifCss" value="[config.mod.path]NotificationsPanel/style.css" />
+	</Constants>
+	
+	<Container>		
+		
+		
+		
+		<!-- Bouton pour afficher le centre de notifications -->
+		<Container name="minimizedPanel">
+			<!-- Barre de fond pour les icones -->
+			<Texture>
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="0" y="0"/>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="460" y="30"/>
+				</Size>
+				<uri>[local.assets]login_tx_inputBg</uri>
+				<autoGrid>true</autoGrid>
+			</Texture>
+			
+			
+			<!-- Label permettant d'afficher la notification à la reception quand réduit --> 
+			<TextArea name="lastNotificationLabel">
+				<Size>
+					<AbsDimension x="460" y="28"/>
+				</Size>
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="0" y="1"/>
+					</Anchor>
+				</Anchors>
+				<css>[local.notifCss]</css>
+				<cssClass>notificationWarn</cssClass>
+				<hyperlinkEnabled>true</hyperlinkEnabled>
+				<!--<html>true</html>-->
+				<useEmbedFonts>false</useEmbedFonts>
+				<visible>false</visible>
+			</TextArea>
+			
+			
+			<!-- Grille qui contient les Icones des notifications -->
+			<Grid name="thumbnailsGrid">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="5" y="5"/>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="400" y="30"/>
+				</Size>
+				<scrollDisplay>auto</scrollDisplay>
+				<vertical>false</vertical>
+				<rendererName>InlineXmlGridRender</rendererName>
+				<rendererArgs>updateEntryThumbnails,,</rendererArgs>
+				<slotWidth>25</slotWidth>
+				<slotHeight>20</slotHeight>
+				
+				<Container>
+					<Size>
+						<AbsDimension x="20" y="20"/>
+					</Size>
+					<!--Texture pour l'icone de la notification -->
+					<Texture name="thumbnail">
+						<Size>
+							<AbsDimension x="20" y="20"/>
+						</Size>
+					</Texture>
+				</Container>
+			</Grid>
+		</Container>
+		
+		
+		
+		
+		<Container name="mainCtr">
+			<visible>false</visible>
+
+			<Texture>
+				<Size>
+					<AbsDimension x="550" y="670" />
+				</Size>
+				<autoGrid>true</autoGrid>
+				<uri>[local.assets]tx_generalBackgroundWithTitle</uri>
+				<shadowColor>[colors.ui.shadow]</shadowColor>
+			</Texture>
+			
+			<!--Titre du module-->
+			<Label name="title">
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="125" y="15"/>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="300" y="30"/>
+				</Size>
+				<text>Centre de Notifications</text>
+				<css>[local.css]title.css</css>
+			</Label>
+			
+			<!--Container image du personnage + nom -->
+			<Container name="infoContainer">
+				
+				<Anchors>
+					<Anchor>
+						<AbsDimension x="15" y="55"/>
+					</Anchor>
+				</Anchors>
+				
+				<!-- Texture de fond ( Surcharge l'interface. )
+				<Texture>
+					<Size>
+						<AbsDimension x="420" y="155" />
+					</Size>
+					<autoGrid>true</autoGrid>
+					<uri>[local.assets]buff_slot_background</uri>
+					<shadowColor>[colors.ui.shadow]</shadowColor>
+				</Texture> -->
+				
+				
+				 <!--Avatar -->
+				<EntityDisplayer name="avatar">
+					
+					<Anchors>
+						<Anchor>
+							<AbsDimension x="0" y="5"/>
+						</Anchor>
+					</Anchors>
+					
+					<Size>
+						<AbsDimension x="210" y="140" />
+					</Size>
+					<view>turnstart</view>
+					<useCache>true</useCache>
+				</EntityDisplayer>
+				
+				<!-- Passer en mode absent -->
+				<simpleButton name="doNotDisturbBtn">
+					<Anchors>
+						<Anchor relativeTo="avatar" relativePoint="TOPRIGHT">
+							<AbsDimension x="-50" y="30"/>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="300" y="40"/>
+					</Size>
+					<label>Suspendre les Notifications</label>
+				</simpleButton>
+				
+				<!-- Permet d'ouvrir l'interface de recherche -->
+				<iconButton name="btnSearch">
+						<Anchors>
+							<Anchor relativeTo="searchInput" relativePoint="TOPRIGHT">
+								<AbsDimension x="1" y="0" />
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="30" y="30" />
+						</Size>
+						<uri>[local.assets]btn_recherche</uri>
+						<visible>true</visible>
+					</iconButton> 
+					
+				<!-- Suuprimer toutes les notifications -->
+				<simpleButton name="clearNotificationsBtn">
+					<Anchors>
+						<Anchor relativeTo="doNotDisturbBtn" relativePoint="BOTTOMLEFT">
+							<AbsDimension x="0" y="10"/>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="300" y="40"/>
+					</Size>
+					<label>Supprimer les Notifications</label>
+				</simpleButton>
+				
+				
+				<!-- TextInput de recherche dans les notifications -->
+				<Container name="searchCtr">
+					<Texture>
+						<Anchors>
+							<Anchor>
+								<AbsDimension x="160" y="145" />
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="280" y="30" />
+						</Size>
+						<autoGrid>true</autoGrid>
+						<visible>false</visible>
+						<uri>[local.assets]Pseudo_input</uri>
+					</Texture>
+					
+					<Input name="searchInput">
+						<Anchors>
+							<Anchor>
+								<AbsDimension x="160" y="150" />
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="280" y="30"/>
+						</Size>
+						<css>[local.css]chat.css</css>
+						<text>Rechercher ...</text>
+					</Input>
+					
+					<!-- Bouton de recherche -->
+					<iconButton name="btnSearch">
+						<Anchors>
+							<Anchor relativeTo="searchInput" relativePoint="TOPRIGHT">
+								<AbsDimension x="1" y="0" />
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="30" y="30" />
+						</Size>
+						<uri>[local.assets]btn_recherche</uri>
+						<visible>true</visible>
+					</iconButton> 
+					
+					<!-- Bouton d'affichage de l'ui des options -->
+					<iconButton name="btnOptions">
+						<Anchors>
+							<Anchor relativeTo="btnSearch" relativePoint="TOPRIGHT">
+								<AbsDimension x="1" y="0" />
+							</Anchor>
+						</Anchors>
+						<Size>
+							<AbsDimension x="30" y="30" />
+						</Size>
+						<uri>[local.assets]btn_option_square</uri>
+						<visible>true</visible>
+					</iconButton> 
+				</Container>
+				
+			</Container>
+			
+			<!-- Container pour les notifications -->
+			<Container name="notificationsContainer">
+				<Anchors>
+					<Anchor relativeTo="infoContainer" relativePoint="BOTTOMLEFT">
+						<AbsDimension x="0" y="45"/>
+					</Anchor>
+				</Anchors>
+				
+				<!-- Texture de fond -->
+				<Texture>
+					<Size>
+						<AbsDimension x="520" y="410" />
+					</Size>
+					<autoGrid>true</autoGrid>
+					<uri>[local.assets]buff_slot_background</uri>
+					<shadowColor>[colors.ui.shadow]</shadowColor>
+				</Texture>				
+				
+				<!-- Grille affichant les notifications dans le mode déroulé -->
+				<Grid name="notificationGrid">
+					<Anchors>
+						<Anchor>
+							<AbsDimension x="5" y="10"/>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="500" y="400"/>
+					</Size>
+					<scrollDisplay>always</scrollDisplay>
+					<rendererName>InlineXmlGridRender</rendererName>
+					<rendererArgs>updateEntry,[colors.grid.line],[colors.grid.line]</rendererArgs>
+					<verticalScrollbarCss>[local.css]scrollBar.css</verticalScrollbarCss>
+					<autoSelect>false</autoSelect>
+					<slotWidth>480</slotWidth>
+					<slotHeight>40</slotHeight>
+					
+					<Container name="notifContainer">
+						<Size>
+	                        <AbsDimension x="480" y="35" />
+						</Size>
+						
+						<!-- Item de la grid réagissant comme un bouton -->
+						<Button name="btn_notif">
+							<Common>
+								<Size>
+									<AbsDimensionx x="465" y="35" />
+								</Size>
+								<radioMode>true</radioMode>
+								<!--Icone de notif -->
+								<Texture name="itemTxt">
+									<Anchors>
+										<Anchor>
+											<AbsDimension x="5" y="3"/>
+										</Anchor>
+									</Anchors>
+									<Size>
+										<AbsDimension x="30" y="30"/>
+									</Size>
+								</Texture>
+								
+								<!-- Texte de la notification -->
+								<TextArea name="notifLabel">
+									<Anchors>
+										<Anchor>
+											<AbsDimension x="37" y="2"/>
+										</Anchor>
+									</Anchors>
+									<Size>
+										<AbsDimension x="440" y="33" />
+									</Size>
+									<!--<wordWrap>true</wordWrap>
+									<multiline>true</multiline>-->
+									<hyperlinkEnabled>true</hyperlinkEnabled>
+									<html>true</html>
+									<css>[local.notifCss]</css>
+									<cssClass>notification</cssClass>
+								</TextArea>
+							
+							</Common>
+							
+							<State type="OVER">
+								<SetProperties target="btn_notif">
+									<bgColor>[colors.grid.over]</bgColor>
+								</SetProperties>
+							</State>
+							
+							<State type="SELECTED">
+								<SetProperties target="btn_notif">
+									<bgColor>[colors.grid.selected]</bgColor>
+								</SetProperties>
+							</State>
+
+							<State type="SELECTED_OVER">
+								<SetProperties target="btn_notif">
+									<bgColor>[colors.grid.selected]</bgColor>
+								</SetProperties>
+							</State>
+						</Button>
+						
+						<iconButton name="deleteNotifBtn">
+							<Anchors>
+								<Anchor>
+									<AbsDimension x="448" y="3"/>
+								</Anchor>
+							</Anchors>
+								<Size>
+									<AbsDimension x="30" y="30"/>
+								</Size>
+							<uri>[local.assets]btn_fermer</uri>
+							<autoGrid>true</autoGrid>
+						</iconButton>
+					</Container>
+				</Grid>
+			</Container>			
+		
+		<!-- Container des checkbox pour desactiver/activer le filtre -->
+		<Container name="checkboxContainer">
+			
+				<visible>false</visible>
+				<Anchors>
+					<Anchor relativeTo="notificationsContainer" relativePoint="BOTTOMLEFT">
+						<AbsDimension x="0" y="-300"/>
+					</Anchor>
+				</Anchors>
+				
+				<!-- Texture de fond -->
+				<Texture>
+					<autoGrid>true</autoGrid>
+					<uri>[local.assets]tx_decoBackground</uri>
+					<Size>
+						<AbsDimension x="400" y="200"/>
+					</Size>
+				</Texture>
+				
+				<!-- Titre de la fenêtre -->
+				<Label>
+					<Anchors>
+						<Anchor relativePoint="TOP" point="CENTER">
+							<AbsDimension x="0" y="50"/>
+						</Anchor>
+					</Anchors>
+					<Size>
+						<AbsDimension x="350" y="30"/>
+					</Size>
+					<text>Afficher les notifications :</text>
+					<css>[local.css]title.css</css>
+				</Label>
+				
+				<!-- Bouton notification sociale MP/Mail/Connexion ami/Guilde Invitation -->
+				<labelCheckBox name="socialCheckbox">
+					<Anchors>
+						<Anchor>
+							<AbsDimension x="90" y="81" />
+						</Anchor>
+					</Anchors>
+					<labelWidth>120</labelWidth>
+					<labelHeight>25</labelHeight>
+					<labelPosX>16</labelPosX>
+					<text>Sociales</text>
+					<selected>true</selected>
+					<Hooks>
+						<OnRelease/>
+					</Hooks>
+				</labelCheckBox>
+				
+				<!-- Bouton notification de groupe Groupe/Koli -->
+				<labelCheckBox name="partyCheckbox">
+					<Anchors>
+						<Anchor>
+							<AbsDimension x="90" y="108" />
+						</Anchor>
+					</Anchors>
+					<labelWidth>120</labelWidth>
+					<labelHeight>25</labelHeight>
+					<labelPosX>16</labelPosX>
+					<text>Invitations</text>
+					<selected>true</selected>
+					<Hooks>
+						<OnRelease/>
+					</Hooks>
+				</labelCheckBox>
+				
+				<!-- Bouton notification de groupe niveau Joueur/Métiers -->
+				<labelCheckBox name="levelCheckbox">
+					<Anchors>
+						<Anchor>
+							<AbsDimension x="90" y="135" />
+						</Anchor>
+					</Anchors>
+					<labelWidth>120</labelWidth>
+					<labelHeight>25</labelHeight>
+					<labelPosX>16</labelPosX>
+					<text>Niveaux</text>
+					<selected>true</selected>
+					<Hooks>
+						<OnRelease/>
+					</Hooks>
+				</labelCheckBox>
+				
+				<!-- Bouton notification de combat Agression/Mort en combat  -->
+				<labelCheckBox name="fightCheckbox">
+					<Anchors>
+						<Anchor>
+							<AbsDimension x="230" y="81" />
+						</Anchor>
+					</Anchors>
+					<labelWidth>120</labelWidth>
+					<labelHeight>25</labelHeight>
+					<labelPosX>16</labelPosX>
+					<text>Combats</text>
+					<selected>true</selected>
+					<Hooks>
+						<OnRelease/>
+					</Hooks>
+				</labelCheckBox>
+				
+				<!-- Bouton notification d'echanges -->
+				<labelCheckBox name="exchangeCheckbox">
+					<Anchors>
+						<Anchor>
+							<AbsDimension x="230" y="108" />
+						</Anchor>
+					</Anchors>
+					<labelWidth>120</labelWidth>
+					<labelHeight>25</labelHeight>
+					<labelPosX>16</labelPosX>
+					<text>Echanges</text>
+					<selected>true</selected>
+					<Hooks>
+						<OnRelease/>
+					</Hooks>
+				</labelCheckBox>
+				
+				<!-- Bouton notification des familiers -->
+				<labelCheckBox name="ankamaCheckBox">
+					<Anchors>
+						<Anchor>
+							<AbsDimension x="230" y="135" />
+						</Anchor>
+					</Anchors>
+					<labelWidth>120</labelWidth>
+					<labelHeight>25</labelHeight>
+					<labelPosX>16</labelPosX>
+					<text>Ankama/Dofus</text>
+					<selected>true</selected>
+					<Hooks>
+						<OnRelease/>
+					</Hooks>
+				</labelCheckBox>
+				
+				
+			</Container>
+			
+			<!-- Bouton pour minimiser cette interface -->
+			<iconButton name="btn_close">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT">
+						<AbsDimension x="1" y="-2" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="57" y="36" />
+				</Size>
+				<uri>[local.assets]btn_cornerCross</uri>
+				<visible>true</visible>
+			</iconButton>
+		</Container>
+		
+	</Container>
+</Definition>
