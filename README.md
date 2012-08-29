@@ -1,0 +1,4 @@
+NotificationsCenter
+===================
+
+Dofus NotificationsCenter module
