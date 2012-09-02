@@ -55,7 +55,7 @@ package com.morgan.factory.manager
 			for each(var p : ConfigProperty in _properties) {
 				if (property == p.associedProperty && moduleName == p.associedConfigModule) {
 					API.configApi.setConfigProperty(p.associedConfigModule, p.associedProperty, value);
-					this.updateDisplay(p, value);
+					this.updateDisplay(p.associedComponent, value);
 					break;
 				}
 			}
@@ -74,7 +74,7 @@ package com.morgan.factory.manager
 			for each (var p : ConfigProperty in _properties) 
 			{
 				if (p.associedProperty == propertyName) {
-					updateDisplay(p, value);
+					updateDisplay(p.associedComponent, value);
 					break;
 				}
 			}
